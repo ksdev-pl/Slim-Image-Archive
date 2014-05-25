@@ -40,6 +40,7 @@ and a slug method taken from:
 
 ##### Things to know
 * If you wish to change allowed types of files that user can upload, update `$mimeTypes` in `Image` model, and both `.htaccess` files under `/files` folder and its `/thumbs` subfolder
+* In `/app/views/image/create.html.twig` you can change `maxFileSize` option for upload script
 * Exception logs are stored in `/tmp/logs`
 * User roles and corresponding privileges:
   * Normal - upload only
