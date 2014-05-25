@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create User{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="/categories"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li><a href="/users">Users</a></li>
+        <li class="active">New user</li>
+    </ol>
+    <form method="post" action="/users">
+        <div class="form-group">
+            <label for="user-email">User email</label>
+            <input type="email" name="email" class="form-control" id="user-email" autofocus required>
+        </div>
+        <div class="form-group">
+            <label for="user-password">User password</label>
+            <input type="password" name="password" class="form-control" id="user-password" required>
+        </div>
+        <div class="form-group">
+            <label for="user-role">User role</label>
+            <select name="role" class="form-control" id="user-role">
+                <option value="3" selected>Normal</option>
+                <option value="2">Extended</option>
+                <option value="1">Admin</option>
+            </select>
+            <p class="help-block"><b>Normal</b> - Upload only / <b>Extended</b> - Upload, Edit & Delete / <b>Admin</b> - Manage Users</p>
+        </div>
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Save</button>
+        <a href="/users" class="btn btn-default">Cancel</a>
+    </form>
+{% endblock %}

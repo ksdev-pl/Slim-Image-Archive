@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ album.getName }} - Images{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="/categories"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li><a href="/categories/{{ category.getId }}/albums">{{ category.getName }}</a></li>
+        <li class="active">{{ album.getName }}</li>
+    </ol>
+    <a href="/categories/{{ category.getId }}/albums/{{ album.getId }}/images/create" class="add-btn btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Upload new images</a>
+    <div class="row">
+    {% for image in images %}
+        <div class="col-xs-4 col-md-3">
+            <a href="/categories/{{ category.getId }}/albums/{{ album.getId }}/images/{{ image.getId }}" class="thumbnail popup" title="{% if image.getDescription %}{{ image.getDescription }}. {% endif %}Uploaded: {{ image.getCreated }}">
+                <img src="/categories/{{ category.getId }}/albums/{{ album.getId }}/images/{{ image.getId }}?thumb=true" alt="{{ image.getName }}">
+            </a>
+            {% if ((sessionUser.role == constant('User::ADMIN')) or (sessionUser.role == constant('User::EXTENDED'))) %}
+            <div class="img-btn pull-right">
+                <a href="/categories/{{ category.getId }}/albums/{{ album.getId }}/images/{{ image.getId }}" class="btn btn-primary btn-xs" download="{{ image.getName }}"><span class="glyphicon glyphicon-download"></span> Download</a>
+                <a href="/categories/{{ category.getId }}/albums/{{ album.getId }}/images/{{ image.getId }}/update" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                <a href="/categories/{{ category.getId }}/albums/{{ album.getId }}/images/{{ image.getId }}/delete" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+            </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

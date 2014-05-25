@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}Title{% endblock %} - Image Archive</title>
+    <meta name="description" content="Simple, fast and secure archive for images">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- styles -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/3/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/0.9.9/magnific-popup.css">
+    {% block styles %}{% endblock %}
+    <link rel="stylesheet" href="/css/main.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>
+</head>
+<body>
+    <!-- body -->
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand navbar-right" href="/categories">Image Archive</a>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-right" id="navbar-collapse">
+                {% if sessionUser %}
+                <span class="navbar-text">Signed in as {{ sessionUser.email }}</span>
+                <a href="/signout" class="btn btn-primary navbar-btn"><span class="glyphicon glyphicon-log-out"></span> Sign out</a>
+                {% endif %}
+                {% if sessionUser.role == constant('User::ADMIN') %}
+                <a href="/users" class="btn btn-primary navbar-btn"><span class="glyphicon glyphicon-user"></span> Manage Users</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <!--[if lt IE 8]>
+        <div class="alert alert-warning alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>.
+        </div>
+        <![endif]-->
+        {% if (flash.success or flash.warning or flash.error) %}
+        <div class="alert {% if flash.success %}alert-success{% endif %}{% if flash.warning %}alert-warning{% endif %}{% if flash.error %}alert-danger{% endif %} alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {% if flash.success %}{{ flash.success }}{% endif %}{% if flash.warning %}{{ flash.warning }}{% endif %}{% if flash.error %}{{ flash.error }}{% endif %}
+        </div>
+        {% endif %}
+        {% block body %}{% endblock %}
+    </div>
+
+    <!-- js -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/0.9.9/jquery.magnific-popup.min.js"></script>
+    {% block scripts %}{% endblock %}
+    <script src="/js/main.js"></script>
+</body>
+</html>

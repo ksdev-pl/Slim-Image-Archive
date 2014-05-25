@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Upload Images{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/css/jquery.fileupload.min.css">
+{% endblock %}
+
+{% block scripts %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.iframe-transport.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.fileupload.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.fileupload-process.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.fileupload-validate.min.js"></script>
+    <script>
+        /*jslint unparam: true, regexp: true */
+        /*global window, $ */
+        $(function () {
+            'use strict';
+            var url = $('#imagesPath').val();
+            $('#fileupload').fileupload({
+                url: url,
+                dataType: 'json',
+                autoUpload: true,
+                acceptFileTypes: /(\.|\/)({{ allowedExtensions }})$/i,
+                maxFileSize: 5000000, // 5 MB
+                disableImagePreview: true,
+                disableAudioPreview: true,
+                disableVideoPreview: true,
+                disableImageResize: /Android(?!.*Chrome)|Opera/
+                        .test(window.navigator.userAgent),
+                previewMaxWidth: 100,
+                previewMaxHeight: 100,
+                previewCrop: true
+            }).on('fileuploadadd', function (e, data) {
+                data.context = $('<div/>').appendTo('#files');
+                $.each(data.files, function (index, file) {
+                    var node = $('<p/>')
+                            .append($('<span/>').text(file.name));
+                    node.appendTo(data.context);
+                });
+            }).on('fileuploadprocessalways', function (e, data) {
+                var index = data.index,
+                        file = data.files[index],
+                        node = $(data.context.children()[index]);
+                if (file.error) {
+                    node
+                            .wrap('<span class="text-danger"/>')
+                            .prepend('<span class="label label-danger">' + file.error + '</span> ');
+                }
+                if (index + 1 === data.files.length) {
+                    data.context.find('button')
+                            .text('Upload')
+                            .prop('disabled', !!data.files.error);
+                }
+            }).on('fileuploadprogressall', function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .progress-bar').css(
+                        'width',
+                        progress + '%'
+                );
+            }).on('fileuploaddone', function (e, data) {
+                $.each(data.result.files, function (index, file) {
+                    if (file.url) {
+                        $(data.context.children()[index])
+                                .wrap('<span class="text-success"/>')
+                                .prepend('<span class="label label-success">Uploaded</span> ');
+                    } else if (file.error) {
+                        var error = '<span class="label label-danger">' + file.error + '</span> ';
+                        $(data.context.children()[index])
+                                .wrap('<span class="text-danger"/>')
+                                .prepend(error);
+                    }
+                });
+            }).on('fileuploadfail', function (e, data) {
+                $.each(data.files, function (index, file) {
+                    var error = '<span class="label label-danger">File upload failed</span> ';
+                    $(data.context.children()[index])
+                            .wrap('<span class="text-danger"/>')
+                            .prepend(error);
+                });
+            }).prop('disabled', !$.support.fileInput)
+                    .parent().addClass($.support.fileInput ? undefined : 'disabled');
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="/categories"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li><a href="/categories/{{ category.getId }}/albums">{{ category.getName }}</a></li>
+        <li><a href="/categories/{{ category.getId }}/albums/{{ album.getId }}/images">{{ album.getName }}</a></li>
+        <li class="active">New images</li>
+    </ol>
+    <span class="btn btn-primary fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>Add files...</span>
+        <input id="imagesPath" type="hidden" name="postpath" value="/categories/{{ category.getId }}/albums/{{ album.getId }}/images">
+        <input id="fileupload" type="file" name="files[]" multiple>
+    </span>
+    <a href="/categories/{{ category.getId }}/albums/{{ album.getId }}/images" class="btn btn-default">Cancel</a>
+    <br>
+    <br>
+    <div id="progress" class="progress">
+        <div class="progress-bar progress-bar-success"></div>
+    </div>
+    <div id="files" class="files"></div>
+{% endblock %}

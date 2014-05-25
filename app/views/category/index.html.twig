@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li class="active"><span class="glyphicon glyphicon-home"></span></li>
+    </ol>
+    <a href="/categories/create" class="add-btn btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Create category</a>
+    <table id="categories" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Category name</th>
+                <th>Created</th>
+                <th>Updated</th>
+                {% if ((sessionUser.role == constant('User::ADMIN')) or (sessionUser.role == constant('User::EXTENDED'))) %}
+                <th class="action">Action</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>
+                    <a href="/categories/{{ category.getId }}/albums">{{ category.getName }}</a>
+                </td>
+                <td>
+                    {{ category.getCreated }}
+                </td>
+                <td>
+                    {{ category.getUpdated }}
+                </td>
+                {% if ((sessionUser.role == constant('User::ADMIN')) or (sessionUser.role == constant('User::EXTENDED'))) %}
+                <td>
+                    <a href="/categories/{{ category.getId }}/update" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                    <a href="/categories/{{ category.getId }}/delete" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

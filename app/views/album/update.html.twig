@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Album{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="/categories"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li><a href="/categories/{{ category.getId }}/albums">{{ category.getName }}</a></li>
+        <li class="active">{{ album.getName }}</li>
+    </ol>
+    <form method="post" action="/categories/{{ category.getId }}/albums/{{ album.getId }}/update">
+        <div class="form-group">
+            <input type="hidden" name="id" value="{{ album.getId }}">
+            <label for="album-name">Album name</label>
+            <input type="text" name="name" class="form-control" id="album-name" value="{{ album.getName }}" autofocus required>
+        </div>
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Save</button>
+        <a href="/categories/{{ category.getId }}/albums" class="btn btn-default">Cancel</a>
+    </form>
+{% endblock %}

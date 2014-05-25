@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Image{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="/categories"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li><a href="/categories/{{ category.getId }}/albums">{{ category.getName }}</a></li>
+        <li><a href="/categories/{{ category.getId }}/albums/{{ album.getId }}/images">{{ album.getName }}</a></li>
+        <li class="active">{{ image.getName }}</li>
+    </ol>
+    <p>
+        <a href="/categories/{{ category.getId }}/albums/{{ album.getId }}/images/{{ image.getId }}" class="img-thumbnail popup" title="{% if image.getDescription %}{{ image.getDescription }}. {% endif %}Uploaded: {{ image.getCreated }}">
+            <img src="/categories/{{ category.getId }}/albums/{{ album.getId }}/images/{{ image.getId }}?thumb=true" alt="{{ image.getName }}">
+        </a>
+    </p>
+    <form method="post" action="/categories/{{ category.getId }}/albums/{{ album.getId }}/images/{{ image.getId }}/update">
+        <div class="form-group">
+            <input type="hidden" name="id" value="{{ image.getId }}">
+            <label for="image-description">Image description</label>
+            <input type="text" name="description" class="form-control" id="image-description" value="{{ image.getDescription }}" autofocus>
+        </div>
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Save</button>
+        <a href="/categories/{{ category.getId }}/albums/{{ album.getId }}/images" class="btn btn-default">Cancel</a>
+    </form>
+{% endblock %}

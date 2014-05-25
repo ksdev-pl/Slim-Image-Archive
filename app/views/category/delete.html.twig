@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Delete Category{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="/categories"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li class="active">{{ category.getName }}</li>
+    </ol>
+
+    <form method="post" action="/categories/{{ category.getId }}/delete" class="alert alert-danger">
+        <div class="form-group">
+            <p>Are you sure to delete <b>{{ category.getName }}</b> category?</p>
+            <p>This will remove all related albums and images!</p>
+        </div>
+        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        <a href="/categories" class="btn btn-default">Cancel</a>
+    </form>
+{% endblock %}

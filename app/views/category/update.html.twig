@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Category{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="/categories"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li class="active">{{ category.getName }}</li>
+    </ol>
+    <form method="post" action="/categories/{{ category.getId }}/update">
+        <div class="form-group">
+            <input type="hidden" name="id" value="{{ category.getId }}">
+            <label for="category-name">Category name</label>
+            <input type="text" name="name" class="form-control" id="category-name" value="{{ category.getName }}" autofocus required>
+        </div>
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Save</button>
+        <a href="/categories" class="btn btn-default">Cancel</a>
+    </form>
+{% endblock %}

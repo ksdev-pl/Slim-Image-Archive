@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Album{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="/categories"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li><a href="/categories/{{ category.getId }}/albums">{{ category.getName }}</a></li>
+        <li class="active">New album</li>
+    </ol>
+    <form method="post" action="/categories/{{ category.getId }}/albums">
+        <div class="form-group">
+            <label for="album-name">Album name</label>
+            <input type="text" name="name" class="form-control" id="album-name" autofocus required>
+        </div>
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Save</button>
+        <a href="/categories/{{ category.getId }}/albums" class="btn btn-default">Cancel</a>
+    </form>
+{% endblock %}

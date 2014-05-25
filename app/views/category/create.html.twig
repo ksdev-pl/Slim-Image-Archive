@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Category{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="/categories"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li class="active">New category</li>
+    </ol>
+    <form method="post" action="/categories">
+        <div class="form-group">
+            <label for="category-name">Category name</label>
+            <input type="text" name="name" class="form-control" id="category-name" autofocus required>
+        </div>
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Save</button>
+        <a href="/categories" class="btn btn-default">Cancel</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,67 @@
+.add-btn {
+    margin-bottom: 20px;
+}
+.img-btn {
+    margin-top: -15px;
+    margin-bottom: 20px;
+}
+.breadcrumb {
+    font-size: 18px;
+}
+.navbar-text {
+    float: none;
+}
+@media (min-width: 768px) {
+    .thumbnail {
+        width: 220px;
+        height: 220px;
+    }
+}
+@media (min-width: 992px) {
+    .thumbnail {
+        width: 213px;
+        height: 213px;
+    }
+}
+@media (min-width: 1200px) {
+    .thumbnail {
+        width: 263px;
+        height: 263px;
+    }
+}
+
+/* DataTables Bootstrap */
+table.dataTable thead .sorting { background: url('/img/sort_both.png') no-repeat center right; }
+table.dataTable thead .sorting_asc { background: url('/img/sort_asc.png') no-repeat center right; }
+table.dataTable thead .sorting_desc { background: url('/img/sort_desc.png') no-repeat center right; }
+
+table.dataTable thead .sorting_asc_disabled { background: url('/img/sort_asc_disabled.png') no-repeat center right; }
+table.dataTable thead .sorting_desc_disabled { background: url('/img/sort_desc_disabled.png') no-repeat center right; }
+
+/* Magnific Popup */
+.mfp-fade.mfp-bg {
+    opacity: 0;
+
+    -webkit-transition: all 0.15s ease-out;
+    -moz-transition: all 0.15s ease-out;
+    transition: all 0.15s ease-out;
+}
+.mfp-fade.mfp-bg.mfp-ready {
+    opacity: 0.8;
+}
+.mfp-fade.mfp-bg.mfp-removing {
+    opacity: 0;
+}
+.mfp-fade.mfp-wrap .mfp-content {
+    opacity: 0;
+
+    -webkit-transition: all 0.15s ease-out;
+    -moz-transition: all 0.15s ease-out;
+    transition: all 0.15s ease-out;
+}
+.mfp-fade.mfp-wrap.mfp-ready .mfp-content {
+    opacity: 1;
+}
+.mfp-fade.mfp-wrap.mfp-removing .mfp-content {
+    opacity: 0;
+}

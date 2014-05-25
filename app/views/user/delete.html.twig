@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Delete User{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="/categories"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li><a href="/users">Users</a></li>
+        <li class="active">{{ user.getEmail }}</li>
+    </ol>
+
+    <form method="post" action="/users/{{ user.getId }}/delete" class="alert alert-danger">
+        <div class="form-group">
+            <p>Are you sure to delete <b>{{ user.getEmail }}</b> user?</p>
+        </div>
+        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        <a href="/users" class="btn btn-default">Cancel</a>
+    </form>
+{% endblock %}

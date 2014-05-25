@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="/categories"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li class="active">Sign In</li>
+    </ol>
+    <form method="post" action="/signin">
+        <div class="form-group">
+            <label for="user-email">Email</label>
+            <input type="email" name="email" class="form-control" id="user-email" autofocus required>
+        </div>
+        <div class="form-group">
+            <label for="user-password">Password</label>
+            <input type="password" name="password" class="form-control" id="user-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> Sign In</button>
+    </form>
+{% endblock %}
