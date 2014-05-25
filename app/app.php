@@ -1,7 +1,7 @@
 <?php
 
 // Configure error reporting
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
+error_reporting(0);
 
 // Configure session
 ini_set('session.cookie_httponly', 1);
@@ -13,7 +13,7 @@ require ROOT . '/vendor/autoload.php';
 
 // Configure Slim & Twig
 $app = new \Slim\Slim([
-    'debug' => true,
+    'debug' => false,
     'view' => new \Slim\Views\Twig(),
     'templates.path' => ROOT . '/app/views',
     'log.writer' => new \Slim\Extras\Log\DateTimeFileWriter([
@@ -26,7 +26,7 @@ $app = new \Slim\Slim([
 ]);
 $view = $app->view();
 $view->parserOptions = [
-    'debug' => true,
+    'debug' => false,
     'cache' => ROOT . '/tmp/cache',
     'auto_reload' => true
 ];
