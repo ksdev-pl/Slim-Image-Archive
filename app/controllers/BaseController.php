@@ -41,7 +41,7 @@ class BaseController
     }
 
     /**
-     * Get logged in User information
+     * Get signed in User information
      *
      * @return array|null
      */
@@ -56,7 +56,7 @@ class BaseController
     }
 
     /**
-     * Get finder of Category
+     * Get a finder of Category
      *
      * @return CategoryFinder
      */
@@ -69,7 +69,7 @@ class BaseController
     }
 
     /**
-     * Get finder of Album
+     * Get a finder of Album
      *
      * @return AlbumFinder
      */
@@ -82,7 +82,7 @@ class BaseController
     }
 
     /**
-     * Get finder of Image
+     * Get a finder of Image
      *
      * @return ImageFinder
      */
@@ -95,7 +95,7 @@ class BaseController
     }
 
     /**
-     * Get finder of User
+     * Get a finder of User
      *
      * @return UserFinder
      */
