@@ -57,10 +57,10 @@ $app->notFound(function () use ($app) {
 // Add DB to DI container
 $app->container->singleton('db', function () {
     return new DB(
-        '192.168.33.10',
-        'root',
-        'root',
-        'gallery'
+        'host',
+        'user',
+        'password',
+        'database'
     );
 });
 
