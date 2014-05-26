@@ -34,10 +34,8 @@ class CustomUploadHandler extends UploadHandler
      *
      * @return string
      */
-    protected function trim_file_name($file_path, $name, $size, $type, $error,
-        $index, $content_range) {
-        $trimmedName = parent::trim_file_name($file_path, $name, $size, $type, $error,
-            $index, $content_range);
+    protected function trim_file_name($file_path, $name, $size, $type, $error, $index, $content_range) {
+        $trimmedName = parent::trim_file_name($file_path, $name, $size, $type, $error, $index, $content_range);
         $fileNameParts = pathinfo($trimmedName);
         $slugOfName = $this->slug($fileNameParts['filename']);
         $resultFileName = $slugOfName . '.' . $fileNameParts['extension'];
