@@ -65,7 +65,7 @@ $app->container->singleton('db', function () {
 });
 
 // Configure routes
-require ROOT . '/app/routes/routes.php';
+require ROOT . '/app/routes.php';
 
 // Run
 $app->run();
