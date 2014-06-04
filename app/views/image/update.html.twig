@@ -16,7 +16,6 @@
     </p>
     <form method="post" action="/categories/{{ category.getId }}/albums/{{ album.getId }}/images/{{ image.getId }}/update">
         <div class="form-group">
-            <input type="hidden" name="id" value="{{ image.getId }}">
             <label for="image-description">Image description</label>
             <input type="text" name="description" class="form-control" id="image-description" value="{{ image.getDescription }}" autofocus>
         </div>

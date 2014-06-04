@@ -10,7 +10,6 @@
     </ol>
     <form method="post" action="/categories/{{ category.getId }}/albums/{{ album.getId }}/update">
         <div class="form-group">
-            <input type="hidden" name="id" value="{{ album.getId }}">
             <label for="album-name">Album name</label>
             <input type="text" name="name" class="form-control" id="album-name" value="{{ album.getName }}" autofocus required>
         </div>
