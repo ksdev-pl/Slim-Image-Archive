@@ -50,12 +50,17 @@ class Image extends ActiveRecord
      */
     public function show($thumb = false) {
 
-        $thumb ? $imgPath = '/files/thumbs/' : $imgPath = '/files/';
+        $imgPath = $thumb ? '/files/thumbs/' : '/files/';
         $fullPath = ROOT . $imgPath . $this->getName();
 
         if (file_exists($fullPath)) {
             $fileExtension = pathinfo($this->getName(), PATHINFO_EXTENSION);
-            $mimeType = self::$mimeTypes[$fileExtension];
+            if (isset(self::$mimeTypes[$fileExtension])) {
+                $mimeType = self::$mimeTypes[$fileExtension];
+            }
+            else {
+                $mimeType = 'application/octet-stream';
+            }
             header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 3600));
             header('Last-Modified: ' . gmdate('D, d M Y H:i:s', filemtime($fullPath)) . ' GMT', true, 200);
             header('Content-type:' . $mimeType);
