@@ -67,7 +67,7 @@ class UserController extends BaseController
 
             $user->setEmail($email);
             $user->setPassword($hash);
-            $user->getRole($role);
+            $user->setRole($role);
             $user->update();
 
             $this->slim->flash('success', 'User updated');
